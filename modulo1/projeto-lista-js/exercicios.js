@@ -92,7 +92,11 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
-  array.push(array.splice(0,1)[0])
+  const aux = array[array.length -1]
+  array.pop()
+  array.push(array[0])
+  array.splice(0,1)
+  array.unshift(aux)
   return array
 }
 
@@ -105,13 +109,20 @@ function checaIgualdadeDesconsiderandoCase(string1, string2) {
 // EXERCÍCIO 13
 function checaRenovacaoRG() {
   // implemente sua lógica aqui
+  const anoAtual = parseInt(prompt("Digite o ano Atual"))
+  const anoNascimento = parseInt(prompt("Digite o ano de nascimento"))
+  const anoCarteira = parseInt(prompt("Digite o ano de emissão da sua carteira de identidade"))
+  const idade = anoAtual - anoNascimento
+  const renovacao = anoAtual - anoCarteira
 
+  console.log(idade <=20 && renovacao >= 5 || idade > 20 && idade <= 50 && renovacao >= 10 || idade > 50 && renovacao >= 15);
 }
 
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
-
+  const ano = parseInt(prompt("Digite o ano"))
+  console.log();
 }
 
 // EXERCÍCIO 15
