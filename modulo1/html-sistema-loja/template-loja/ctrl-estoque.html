@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+    <header>
+        <p>Tech House</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Página Inicial</a>
+        <a>|</a>
+        <a href="ctrl-estoque.html">Controle de Estoque</a>
+        <a>|</a>
+        <a href="add-produto.html">Adicionar Produto</a>
+        <a>|</a>
+        <a href="funcionarios.html">Funcionários</a>
+    </nav>
+
+    
+    <h2 class="estoque">Controle de Estoque</h2>
+
+    <div class="estoque">
+    <table>
+        <tr>
+            <th>Foto</th>
+            <th>Descrição</th>
+            <th>Preço (R$)</th>
+            <th>Quantidade disponível</th>
+        </tr>
+
+        <tr>
+            <td><img width="150px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6RJH-8EN_SQvN-_XCOf2i4KEn02MfAJHkKQ&usqp=CAU" alt="Teclado"/></td>
+            <td> Teclado </td>
+            <td> 85,00 </td>
+            <td> 40 </td>
+        </tr>
+
+        <tr>
+            <td><img width="150px" src="data:image/jpeg;base64,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" alt="Iphone 12"/></td>
+            <td> Iphone 12 </td>
+            <td> 3.900,00 </td>
+            <td> 28 </td>
+        </tr>
+
+        <tr>
+            <td><img width="150px" src="https://m.media-amazon.com/images/I/51FUhlHc42L._AC_SX679_.jpg" alt="Headset Gamer"/></td>
+            <td> Headset Gamer </td>
+            <td> 298,00 </td>
+            <td> 19 </td>
+        </tr>
+
+        <tr>
+            <td><img width="150px" src="https://a-static.mlcdn.com.br/618x463/pendrive-sandisk-128gb/lojavipimportados/113p/519ce1851a76dabdf4f9fa292ba9c6be.jpg" alt="Pedrive 128GB"/></td>
+            <td> Pendrive 128GB </td>
+            <td> 80,00 </td>
+            <td> 10 </td>
+        </tr>
+        
+        <!-- Crie mais uma linha desta tabela abaixo \/ -->
+
+        <tr>
+            <td><img width="150px" src="data:image/jpeg;base64,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" alt="Mousepad"/></td>
+            <td> Mousepad </td>
+            <td> 15,00 </td>
+            <td> 8 </td>
+        </tr>
+    </table>
+    </div>
+
+</body>
+</html>
