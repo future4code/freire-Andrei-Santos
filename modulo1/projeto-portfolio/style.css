@@ -1,0 +1,337 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    margin:0px;
+    font-family: "roboto", sans-serif;
+    background-color:#141416;
+    color:white;
+}
+.container{
+    max-width:1150px;
+    margin:auto;
+    display:Flex;
+    justify-content: space-between;
+    align-items:center;
+}
+/*
+topo
+*/
+.topo{
+    background-color:#202026;   
+    height:150px;
+    position:fixed;
+    top:0px;
+    width:100vw;
+}
+.logo{
+    height:150px;
+    padding-top:30px;
+    font-size:14px; 
+    font-weight:bold;
+    line-height:25px;
+}
+.logo span{
+    color:#0bceaf;
+    font-size:40px;
+    letter-spacing:8px;
+    line-height:30px;
+}
+.menu{
+    display:inline-block;
+    width:100%;
+    height:150px;
+    padding-top:50px;
+    padding-left:70px;
+}
+ul{
+    margin:0px;
+    padding:0px;
+}
+li{
+    list-style:none;
+    display:inline-block;
+    padding:20px;
+}
+a{
+    display:block;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+    color:white;    
+    padding-bottom:12px;
+}
+a:hover,
+.menu .active{
+    color:#0bceaf;
+    border-bottom:1px solid white;
+}
+/*
+home
+*/
+.home{
+    height:800px;
+    background-image:url(imagens/home.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.fundo-transparente{
+    width:100vw;
+    height:800px;
+    background-color:rgba(0, 0, 0, 0.8);
+}
+
+.info{
+    padding-top:230px;
+}
+.bem-vindo{
+    font-size:18px;
+    font-weight:bold;
+    background-color:#0bceaf;
+    width:250px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    border-radius:25px 25px 25px 0px;
+}
+.titulo{
+    font-weight:bold;
+    margin-top:18px;
+    font-size:70px;
+}
+.sub-titulo{
+    font-weight:bold;
+    margin-top:10px;
+    font-size:25px;
+}
+.contatos{
+    margin-top:40px;
+    margin-bottom:40px;
+}
+.conteudo-contato{
+    padding-bottom:15px;
+    font-size:16px;
+}
+.conteudo-contato i{
+    font-size:20px;
+    margin-right:10px;
+}
+.conteudo-contato i:hover{
+    color:#0bceaf;
+}
+.redes-sociais{
+    width:250px;
+    display:flex;
+    justify-content:space-around;
+}
+.redes-sociais i{
+    font-size:22px;
+    padding:15px;
+    border-radius:5px;
+}
+.redes-sociais i:hover{
+    background-color:white;
+    color:#0bceaf;
+    cursor:pointer;
+}
+.foto{
+    margin-top:230px;
+    margin-right:50px;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    border: 20px solid rgba(0, 0, 0, 0.5);
+    display:flex;
+    justify-content:center;
+}
+.foto img{  
+    width:470px;
+    border-radius:50%;
+    border: 20px solid rgba(0, 0, 0, 0.4);
+}
+/*
+sobre
+*/
+.sobre{
+    padding-top:80px;
+    padding-bottom:80px;
+}
+.sobre-img{
+    margin-right:180px;
+    margin-left:50px;
+}
+.sobre-img img{
+    width:400px;
+}
+.sobre h1{
+    font-size:40px;
+}
+.sobre h2{
+    font-size: 16.2px;
+    font-weight:normal;
+}
+/*
+formação
+*/
+.formacao{
+    height:1100px;
+    background-image:url(imagens/formacao-bg.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.formacao .container{
+    align-items:flex-start;
+}
+.formacao .fundo-transparente{
+    height:1100px;
+}
+.formacao .title{
+    margin-bottom:50px;
+    font-size:35px;
+    font-weight:bold;
+}
+.educacao,
+.experiencia{
+    padding-top:120px;
+}
+.box{
+    padding:30px;
+    background-color:#202026;
+    border-radius:8px;
+    min-height:230px;
+    margin-bottom:40px;
+}
+.box-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:15px;
+    margin-right:70px;
+}
+.box-description{
+    font-size:18px;
+    margin-bottom:15px;
+}
+.box-date{
+    color:#0bceaf;
+}
+/*
+habilidades
+*/
+.habilidades .container{
+    align-items:flex-start;
+}
+.habilidades-tecnicas,
+.habilidades-profissionais{
+    padding-top:120px;
+    padding-bottom:80px;
+}
+.habilidades-tecnicas{
+    width:50%;
+}
+.habilidades-profissionais{
+    width:50%;
+    margin-left:200px;
+}
+.h-title{
+    font-size:35px;
+    font-weight:bold;
+    margin-bottom:80px;
+}
+.habilidades-tecnicas .h-area{
+    font-weight:bold;
+    font-size:17px;
+}
+.progress{
+    height:10px;
+    border-radius:5px;
+    background: rgba(199, 198, 198, 0.6);
+    margin-right:100px;
+    margin-bottom:20px;
+    margin-top:10px;
+}
+.progress-color1{
+    height:10px;
+    width:90%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.progress-color2{
+    height:10px;
+    width:70%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.progress-color3{
+    height:10px;
+    width:50%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.progress-color4{
+    height:10px;
+    width:85%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.progress-color5{
+    height:10px;
+    width:40%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.progress-color6{
+    height:10px;
+    width:30%;
+    border-radius:5px;
+    background-color:#0bceaf;
+}
+.item-progress{
+    width:125px;
+    height:125px;
+    border-radius:70px;
+    border:7px solid #0bceaf;
+    font-size:18px;
+    text-align:center;
+    line-height:125px;
+}
+.item-info{
+    max-width:125px;
+    text-align:center;
+    margin-top:10px;
+    font-weight:normal;
+}
+.habilidades-profissionais .h-area{
+    display:inline-block;
+    margin-right:110px;
+}
+.habilidades-profissionais .h-area{
+    margin-bottom:50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+rodapé
+*/
+.rodape{
+    background-color:#0bceaf;
+    color:white;
+    text-align:center;
+    line-height:50px;
+    width:100%;
+    height:50px;
+}
