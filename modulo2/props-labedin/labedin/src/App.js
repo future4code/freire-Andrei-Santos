@@ -5,6 +5,9 @@ import ImagemButton from './components/ImagemButton/ImagemButton';
 import CardPequeno from './components/CardPequeno/CardPequeno';
 import Foto from './imagens/foto.png';
 import Logo from './imagens/download.png';
+import Email from './imagens/email.png';
+import Local from './imagens/local.png';
+
 
 
 function App() {
@@ -24,13 +27,13 @@ function App() {
         />
 
         <CardPequeno
-          imagem="https://cdn-icons.flaticon.com/png/512/3178/premium/3178158.png?token=exp=1654697452~hmac=33382fcb420abcbd60c3e5f3475cd215"
+          imagem={Email}
           nome="Email:"
           info="andrei_labenu@123.com"
         />
 
         <CardPequeno
-          imagem="https://cdn-icons.flaticon.com/png/512/4296/premium/4296496.png?token=exp=1654697505~hmac=1a0899d5a80b7f9afdceb9f0ecc31132"
+          imagem={Local}
           nome="Endereço:"
           info="Rua central 42"
         />
