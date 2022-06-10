@@ -40,12 +40,20 @@ const PostPhoto = styled.img`
   width: 100%;
 `
 
+const Coment = styled.p`
+  padding-left: 5px;
+`
+
 class Post extends React.Component {
   state = {
     curtido: false,
     numeroCurtidas: 0,
     comentando: false,
-    numeroComentarios: 0
+    numeroComentarios: 0,
+    valorInputComentario: "",
+    comentarios:[
+      {comentario: ""}
+    ]
   }
 
   onClickCurtida = () => {
@@ -57,7 +65,6 @@ class Post extends React.Component {
       this.setState({
         numeroCurtidas: 1
       })
-      alert('Curtiu!')
     }
     else{
       this.setState({
@@ -77,10 +84,25 @@ class Post extends React.Component {
       comentando: false,
       numeroComentarios: this.state.numeroComentarios + 1
     })
-    alert('Comentou!')
+
+    const novoComentario = {comentario: this.state.valorInputComentario,}
+    const novosComentarios = [novoComentario, ...this.state.comentarios]
+    this.setState({ comentarios: novosComentarios });
   }
 
+  onChangeInputComentario = (event) => {
+    this.setState({ valorInputComentario: event.target.value });
+  };
+
   render() {
+    const listaDeComponentes = this.state.comentarios.map((coment) => {
+      return (
+        <Coment>
+          {coment.comentario}
+        </Coment>
+      )
+    })
+
     let iconeCurtida
 
     if(this.state.curtido) {
@@ -92,7 +114,7 @@ class Post extends React.Component {
     let componenteComentario
 
     if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} />
+      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} onChange={this.onChangeInputComentario} />
     }
 
     return <PostContainer>
@@ -117,6 +139,7 @@ class Post extends React.Component {
         />
       </PostFooter>
       {componenteComentario}
+      {listaDeComponentes}
     </PostContainer>
   }
 }
