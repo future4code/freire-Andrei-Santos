@@ -5,18 +5,28 @@ const ContainerChat = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content:center;
+  background-color:#41706D;
   height: 100vh;
+  min-width:450px;
+  margin:auto;
+  padding-left:20px;
+  padding-right:20px;
 `;
 const ChatArea = styled.div`
   background-color: #ccc;
   height: 100vh;
-  width: 600px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  max-width: 600px;
+  margin:auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+
+
 `;
 const TextoArea = styled.div`
   background-color: #A9AFB6;
@@ -52,17 +62,25 @@ const InputArea = styled.div`
 `
 const InputUser = styled.input`
     border-radius:10px;
-    flex:2;
     margin-right:5px;
+    width:100px;
+    color:#FF5B77;
 `
 const InputMsg = styled.input`
     border-radius:10px;
-    flex:5;
     margin-right:5px;
+    width:200px;
+
 `
 const InputAdd = styled.button`
     border-radius:10px;
-    flex:1;
+    width:80px;
+
+    &:hover{
+      cursor:pointer;
+      background-color:#A9AFB6;
+      box-shadow:1px 1px 2px black;
+    }
 `
 
 class App extends Component {
