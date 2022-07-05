@@ -4,14 +4,14 @@ import styled from "styled-components";
 import { BASE_URL } from "../constants/urls";
 import voltar from "../assets/images/voltar.png"
 import nota_musical from "../assets/images/nota-musical.png"
-
-
+import AddTrack from "./AddTrack";
 
 const Container = styled.div`
   width:100%;
   display:flex;
   flex-direction:column;
   background:linear-gradient(#2C89C7, black);
+  overflow-x:auto;
 `
 const Back = styled.img`
   margin-left:50px;
@@ -58,9 +58,7 @@ const Head = styled.div`
 `
 const Musics = styled.ol`
   background:linear-gradient(#00000050, #00000099);
-  height:10000px;
   padding:50px;
-  overflow-x:auto;
 `
 const ListItem = styled.li`
   display:flex;
@@ -93,14 +91,80 @@ const Artist = styled.div`
 `
 const Info = styled.div`
 `
+const Add = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  margin-left:20px;
+  margin-right:20px;
+  padding:20px;
+  span{
+      display:none;
+  }
+  h1{
+      margin: 0px;;
+      margin-bottom:5px;
+      font-size:20px;
+  }
+  img{
+      display:none;
+  }
+  button{
+      padding:5px 10px;
+      border-radius: 50px;
+      font-size:16px;
+      background-color:white;
+      font-weight:bold;
+      :hover{
+          background-color:#ffffff10;
+          border: 2px solid #1ED760;
+          color:#1ED760;
+          cursor:pointer;
+      }
+  }
+  div{
+      input{
+          outline:0;
+          border:0;
+          max-width:200px;
+          background-color:transparent;
+          border-bottom:1px solid #ccc;
+          margin-bottom:30px;
+          font-size:20px;
+          color:white;
+      }
+  }
+  #ButtonArea{
+    display:flex;
+    justify-content:space-between;
+    div{
+        color:red;
+        display:flex;
+        align-items:center;
+        font-size:20px;
+        padding:5px;
+        :hover{
+            cursor:pointer;
+            text-shadow:1px 1px 10px white;
+        }
+    }
+  }
+`
+
 
 
 export default class PlayListDetails extends React.Component {
   state = {
-    playlistDetails: []
+    playlistTracks: [],
+    playlistId: ""
   }
 
   componentDidMount(){
+    this.getPlaylistTracks()
+  }
+
+  componentDidUpdate(){
     this.getPlaylistTracks()
   }
 
@@ -111,15 +175,15 @@ export default class PlayListDetails extends React.Component {
         Authorization: "andrei-freire"
       }
     }).then((res) => {
-      this.setState({playlistDetails: res.data.result.tracks})
-      console.log(this.state.playlistDetails)
+      this.setState({playlistTracks: res.data.result.tracks})
+      this.setState({playlistId: this.props.id})
     }).catch((err) => {
       console.log(err.response.data)
     })
   }
   
   render(){
-    const music = this.state.playlistDetails.map((music) => {
+    const music = this.state.playlistTracks.map((music) => {
       return (
         <div>
           <ListItem>
@@ -140,11 +204,16 @@ export default class PlayListDetails extends React.Component {
           <Name>
             <span>PLAYLIST</span>
             <h1>{this.props.name}</h1>
-            <h3>{`• ${this.state.playlistDetails.length} músicas`}</h3>
+            <h3>{`• ${this.state.playlistTracks.length} músicas`}</h3>
           </Name>
         </Head>
+        <Add>
+          <AddTrack
+          id={this.state.playlistId}
+          />
+        </Add>
         <Musics>
-          {music}
+        {music}
         </Musics>
       </Container>
     )

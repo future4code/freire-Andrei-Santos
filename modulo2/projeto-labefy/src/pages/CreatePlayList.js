@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-import AddTrack from "./AddTrack";
+import AddTrackToNewPlaylist from "./AddTrack";
 import { BASE_URL } from "../constants/urls"
+import AddTrack from "./AddTrack";
 
 const Container = styled.div`
     display:flex;
@@ -59,11 +60,68 @@ const Create = styled.div`
     cursor:pointer;
   }
 `
-
+const Add = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  padding-top:30px;
+  height:100vh;
+  width:100%;
+  span{
+      margin-top:20px;
+      font-size:50px;
+      margin-bottom:50px;
+  }
+  h1{
+      margin-bottom: 0px;;
+      font-size:25px;
+  }
+  img{
+      height:180px;
+      margin-top:30px;
+  }
+  button{
+      margin-top:30px;
+      padding:20px 40px;
+      border-radius: 50px;
+      font-size:20px;
+      background-color:white;
+      font-weight:bold;
+      :hover{
+          background-color:#ffffff10;
+          border: 2px solid #1ED760;
+          color:#1ED760;
+          cursor:pointer;
+      }
+  }
+  div{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      input{
+          width:250px;
+          width:80%;
+          font-size:50px;
+          outline:0;
+          border:0;
+          border-bottom:1px solid #ccc;
+          color:white;
+          background-color:#222;
+          padding-bottom:10px;
+      }
+  }
+  #ButtonArea{
+    div{
+      display:none;
+    }
+  }
+`
 
 export default class CreatePlayList extends React.Component {
   state = {
     name: "",
+    id: "",
     currentScreen: "createPL"
   }
 
@@ -79,7 +137,7 @@ export default class CreatePlayList extends React.Component {
     }).then((res) => {
       alert(`Playlist ${this.state.name} criada com sucesso!`)
       this.setState({currentScreen: "addTrack"})
-      console.log(res)
+      this.getPlaylistId()
     }).catch((err) => {
       alert(err.response.data.message)
     })
@@ -89,16 +147,45 @@ export default class CreatePlayList extends React.Component {
     this.setState({name: event.target.value})
   }
 
+  getPlaylistId = () => {
+    axios.get(`${BASE_URL}`,
+    {
+      headers: {
+        Authorization: "andrei-freire"
+      }
+    }).then((res) => {
+      const newPL = res.data.result.list.filter((pl) => {
+        return pl.name === this.state.name
+      })
+
+      const id = newPL.map((pl) => {
+        return pl.id
+      })
+
+      this.setState({id: id})
+    }).catch((err) => {
+      console.log(err.response)
+    })
+  }
+
 
 
   render(){
     return (
       <Container>
-        {this.state.currentScreen === "addTrack" ? 
-          <AddTrack
-            name={this.state.name}
-          /> 
+        {this.state.currentScreen === "addTrack" 
+
+          ? 
+
+          <Add>
+            <AddTrack
+              name={this.state.name}
+              id={this.state.id}
+            /> 
+          </Add>
+
           :
+
           <Name>
           <span>Dê um nome á sua playlist.</span>
           <input 
@@ -110,7 +197,6 @@ export default class CreatePlayList extends React.Component {
             <Cancel onClick={this.props.cancel}>CANCELAR</Cancel>
             <Create onClick={this.createPL}>CRIAR</Create>
           </Buttons>
-
           </Name>
         }               
       </Container>

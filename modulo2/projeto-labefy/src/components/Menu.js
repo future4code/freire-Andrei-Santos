@@ -9,12 +9,6 @@ import { AiOutlineHome } from "react-icons/ai";
 import { RiPlayListFill } from "react-icons/ri";
 import { MdLibraryAdd } from "react-icons/md";
 
-
-
-
-
-
-
 const Container = styled.div`
     border:1px solid black;
     width:300px;
