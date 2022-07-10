@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
-import React, { useState } from "react";
-import Match from "./pages/Match/Match.js";
+import axios from "axios"
+import React, { useState, useEffect } from "react";
+import Choice from "./pages/Choice/Choice.js";
 import Chat from "./pages/Chat/Chat.js";
 import Location from "./pages/Location/Location.js";
 import Profile from "./pages/Profile/Profile.js";
@@ -8,6 +9,8 @@ import { BsChatDots } from "react-icons/bs";
 import { RiHeartsLine } from "react-icons/ri";
 import { GoLocation } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
+import { GoAlert } from "react-icons/go";
+
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -81,8 +84,8 @@ const ContentButton = styled.div`
     }
   }
   ${(props) => {
-      if(props.screen === "match"){
-        return '#match{color:#2836B5;}'
+      if(props.screen === "choice"){
+        return '#choice{color:#2836B5;}'
       }
       else if(props.screen === "chat"){
         return '#chat{color:#2836B5;}'
@@ -95,22 +98,80 @@ const ContentButton = styled.div`
       }
     }}
 `
+const Clear = styled.div`
+  position:absolute;
+  bottom:20px;
+  right:10%;
+  background-color:white;
+  padding:5px;
+  border-radius:5px;
+  border: 1px solid black;
+  display:flex;
+  align-items:center;
+  box-shadow:5px 5px 5px #777;
+
+  svg{
+    margin-right:5px;
+  }
+
+  :hover{
+    cursor:pointer;
+    border: 1px solid red;
+    box-shadow:5px 5px 5px #555;
+
+    svg{
+      color:red;
+    }
+  }
+
+`
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState("match");
+  const [currentScreen, setCurrentScreen] = useState("choice");
+
+  // useEffect(() => {
+  //   getProfileToChoose()
+  // }, [])
+
+  // const getProfileToChoose = () => {
+  //   axios.get("https://us-central1-missao-newton.cloudfunctions.net/astrochoice/:darvas/person", {
+  //     headers: {
+  //       Authorization: "andrei-freire"
+  //     }
+  //   }).then(res => {
+  //     console.log(res.data.profile)
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  // }
+
+  
+
+  const clear = () => {
+    axios.put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/:aluno/clear", {
+      headers: {
+        Authorization: "andrei-freire"
+      }
+    }).then(res => {
+      alert(res.data.message)
+      window.location.reload(false);
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   const switchScreen = () => {
     switch (currentScreen) {
       case "location":
         return <Location/>;
-      case "match":
-        return <Match/>;
+      case "choice":
+        return <Choice clear={clear}/>;
       case "chat":
         return <Chat/>;
       case "profile":
         return <Profile/>;
       default:
-        return <Match/>;
+        return <choice/>;
     }
   };
 
@@ -118,8 +179,8 @@ const App = () => {
     setCurrentScreen("location");
   };
 
-  const onClickMatch = () => {
-    setCurrentScreen("match");
+  const onClickChoice = () => {
+    setCurrentScreen("choice");
   };
 
   const onClickChat = () => {
@@ -140,12 +201,14 @@ const App = () => {
         {switchScreen()}
         <ContentButton  screen={currentScreen}>
             <GoLocation id="location" onClick={onClickLocation}/>
-            <RiHeartsLine id="match" onClick={onClickMatch}/>
+            <RiHeartsLine id="choice" onClick={onClickChoice}/>
             <BsChatDots id="chat" onClick={onClickChat}/>
             <CgProfile id="profile" onClick={onClickProfile}/>
         </ContentButton>
       </Content>
-      
+      <Clear onClick={clear}>
+        <GoAlert/> <span>Limpar todos os matches e perfis vistos.</span>
+      </Clear>
     </Container>
   );
 };
