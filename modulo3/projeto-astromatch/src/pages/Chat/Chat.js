@@ -24,6 +24,14 @@ const Content = styled.div`
   margin-top: 5px;
   height: 525px;
   overflow-x: auto;
+
+  @media (max-width: 415px) {
+    width: 310px;
+  }
+  @media (max-height: 800px) {
+    height: 465px;
+  }
+
   div {
     display: flex;
     align-items: center;

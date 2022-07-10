@@ -43,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   background-color: #ccc;
   display: flex;
+  flex-direction:column;
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -66,13 +67,20 @@ const Content = styled.div`
   width: 400px;
   margin: 20px;
   position:relative;
+
+  @media (max-width:415px){
+    width: 350px;
+  }
+  @media (max-height:800px){
+    height: 600px;
+  }
 `;
 const ContentButton = styled.div`
   display:flex;
   justify-content:space-around;
   align-items:flex-end;
   position:absolute;
-  height:60px;
+  height:40px;
   bottom:10px;
   left:0px;
   right:0px;
@@ -99,9 +107,6 @@ const ContentButton = styled.div`
     }}
 `
 const Clear = styled.div`
-  position:absolute;
-  bottom:20px;
-  right:10%;
   background-color:white;
   padding:5px;
   border-radius:5px;
@@ -109,6 +114,13 @@ const Clear = styled.div`
   display:flex;
   align-items:center;
   box-shadow:5px 5px 5px #777;
+  position:absolute;
+  bottom:20px;
+  right:20%;
+
+  @media (max-width:950px){
+    position: static;
+  }
 
   svg{
     margin-right:5px;
@@ -206,6 +218,7 @@ const App = () => {
             <CgProfile id="profile" onClick={onClickProfile}/>
         </ContentButton>
       </Content>
+      
       <Clear onClick={clear}>
         <GoAlert/> <span>Limpar todos os matches e perfis vistos.</span>
       </Clear>

@@ -3,7 +3,11 @@ import axios from "axios";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa";
 import { clear } from "@testing-library/user-event/dist/clear";
-// import { RiHeartsLine } from "react-icons/ri"
+import { AiFillHeart } from "react-icons/ai"
+import { MdCancel } from "react-icons/md"
+
+
+
 
 const Container = styled.div``;
 const Content = styled.div`
@@ -13,15 +17,36 @@ const Content = styled.div`
   margin-top: 5px;
   height: 525px;
   width: 360px;
+
+  @media (max-width: 415px) {
+    width: 310px;
+  }
+  @media (max-height: 800px) {
+    height: 465px;
+  }
 `;
 const ContentInfo = styled.div`
   height: 525px;
   width: 360px;
   position: relative;
+
+  @media (max-width: 415px) {
+    width: 310px;
+  }
+  @media (max-height: 800px) {
+    height: 465px;
+  }
   img {
     height: 525px;
     width: 360px;
     border-radius: 10px;
+
+    @media (max-width: 415px) {
+      width: 310px;
+    }
+    @media (max-height: 800px) {
+      height: 465px;
+    }
   }
   #text {
     position: absolute;
@@ -68,7 +93,7 @@ const ContentButton = styled.div`
     width: 60px;
     background-color: white;
     text-align: center;
-    line-height: 60px;
+    line-height: 55px;
     border-radius: 100px;
     font-size: 30px;
     color: #aaa;
@@ -93,7 +118,7 @@ const ContentButton = styled.div`
     height: 60px;
     width: 60px;
     text-align: center;
-    line-height: 63px;
+    line-height: 70px;
     border-radius: 100px;
     font-size: 25px;
     color: #f99df0;
@@ -189,7 +214,7 @@ const Choice = (props) => {
         setLoad(false);
       })
       .catch((err) => {
-        console.log(err);        
+        console.log(err);
       });
   };
 
@@ -251,7 +276,7 @@ const Choice = (props) => {
           <div>
             {load ? (
               <Load>
-                <FaHeart size="200px" />
+                <FaHeart size="100px" />
               </Load>
             ) : (
               <ContentInfo>
@@ -271,13 +296,13 @@ const Choice = (props) => {
                     id="reprove"
                     onClick={() => choosePerson(profileToChoose.id, false)}
                   >
-                    X
+                    x
                   </div>
                   <div
                     id="approve"
                     onClick={() => choosePerson(profileToChoose.id, true)}
                   >
-                    ❤
+                    <AiFillHeart/>
                   </div>
                 </ContentButton>
               </ContentInfo>
@@ -288,7 +313,6 @@ const Choice = (props) => {
         {/* <Load>
           <FaHeart size="200px" />
         </Load> */}
-
       </Content>
     </Container>
   );
