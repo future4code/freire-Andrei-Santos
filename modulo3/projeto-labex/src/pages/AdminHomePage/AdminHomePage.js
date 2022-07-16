@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { IoMdTrash } from "react-icons/io"
 import { IoMdRocket } from "react-icons/io"
-import { goToBack, goToCreateTripPage, goToHomePage, goToLoginPage, goToTripDetailsPage } from "../../Routes/Cordinator";
+import { goToCreateTripPage, goToHomePage, goToLoginPage, goToTripDetailsPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { logout, getTrips } from "../../Services/requests"
 
 const Container = styled.div`
   display:flex;
@@ -149,8 +151,33 @@ const Content = styled.div`
 `
 
 const AdminHomePage = () => {
-
+  
   const navigate = useNavigate()
+
+  const [listTrips, setListTrips] = useState([])
+
+  useEffect(() => {
+    getTrips(saveTrips)
+    const token = localStorage.getItem("token")
+
+    if(token  === null){
+      navigate("/login")
+    }
+  }, [])
+
+  const saveTrips = (data) => {
+    setListTrips(data)
+  }
+
+  const card = listTrips.map((trip)=> {
+    return (
+      <Card key={trip.id} onClick={() => goToTripDetailsPage(navigate, trip.id)}>
+      <p>{trip.name}</p>
+      <div><IoMdTrash /></div>
+      </Card>
+    )
+  })
+
   return (
     <Container>
       <Header>
@@ -165,27 +192,12 @@ const AdminHomePage = () => {
       <Content>
         <span>Painel Administrativo</span>
         <ButtonArea>
-          <div onClick={() => goToBack(navigate)}>Voltar</div>
+          <div onClick={() => goToHomePage(navigate)}>Voltar</div>
           <div onClick={() => goToCreateTripPage(navigate)}>Criar Viagem</div>
-          <div>Logout</div>
+          <div onClick={() => logout(navigate)}>Logout</div>
         </ButtonArea>
         <CardArea>
-          <Card onClick={() => goToTripDetailsPage(navigate)}>
-            <p>Viagem fria para Plutão</p>
-            <div><IoMdTrash /></div>
-          </Card>
-          <Card onClick={() => goToTripDetailsPage(navigate)}>
-            <p>Viagem fria para Plutão</p>
-            <div><IoMdTrash /></div>
-          </Card>
-          <Card onClick={() => goToTripDetailsPage(navigate)}>
-            <p>Viagem fria para Plutão</p>
-            <div><IoMdTrash /></div>
-          </Card>
-          <Card onClick={() => goToTripDetailsPage(navigate)}>
-            <p>Viagem fria para Plutão</p>
-            <div><IoMdTrash /></div>
-          </Card>
+          {card}
         </CardArea>
       </Content>
     </Container>

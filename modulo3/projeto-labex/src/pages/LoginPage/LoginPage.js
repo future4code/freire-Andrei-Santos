@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { IoMdRocket } from "react-icons/io"
-import { goToBack, goToAdminHomePage, goToHomePage } from "../../Routes/Cordinator";
+import { goToHomePage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../Services/requests";
+import React, { useState } from "react"
 
 const Container = styled.div`
   display:flex;
@@ -109,6 +111,18 @@ const LoginPage = () => {
 
   const navigate = useNavigate()
 
+  const [email, setEmail] = useState("")
+
+  const [password, setPassword] = useState("")
+
+  const handdleInputEmail = (event) => {
+    setEmail(event.target.value)
+  }
+
+  const handdleInputPassword = (event) => {
+    setPassword(event.target.value)
+  }
+
   return (
     <Container>
       <Header>
@@ -116,18 +130,18 @@ const LoginPage = () => {
           <IoMdRocket />
           LabeX
         </LogoHeader>
-        <User onClick={() => goToBack(navigate)}>
+        <User onClick={() => goToHomePage(navigate)}>
           Voltar
         </User>
       </Header>
       <Content>
         <span>Login</span>
         <form>
-          <input placeholder="Nome"></input>
-          <input placeholder="Idade"></input>
+          <input value={email} onChange={handdleInputEmail} placeholder="E-mail"></input>
+          <input value={password} onChange={handdleInputPassword} placeholder="Senha" type="password"></input>
           <ButtonArea>
-            <div onClick={() => goToBack(navigate)}>Voltar</div>
-            <div>Entrar</div>
+            <div onClick={() => goToHomePage(navigate)}>Voltar</div>
+            <div onClick={() => login(email, password, navigate)}>Entrar</div>
           </ButtonArea>
         </form>
       </Content>

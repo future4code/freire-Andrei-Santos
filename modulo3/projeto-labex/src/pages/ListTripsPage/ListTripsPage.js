@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { goToBack, goToApplicationFormPage, goToHomePage, goToLoginPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
 import { IoMdRocket } from "react-icons/io"
+import { getTrips } from "../../Services/requests";
+import React, { useState, useEffect } from "react"
 
 
 const Container = styled.div`
@@ -125,6 +127,28 @@ const ListTripsPage = () => {
 
   const navigate = useNavigate()
 
+  const [listTrips, setListTrips] = useState([])
+
+  useEffect(() => {
+    getTrips(saveTrips)
+  }, [])
+
+  const saveTrips = (data) => {
+    setListTrips(data)
+  }
+
+  const trips = listTrips.map((trip) => {
+    return (
+      <Card>
+        <p><b>Nome: </b>{trip.name}</p>
+        <p><b>Descrição: </b>{trip.description}</p>
+        <p><b>Planeta: </b>{trip.planet}</p>
+        <p><b>Duração: </b>{trip.durationDays}</p>
+        <p><b>Data: </b>{trip.date}</p>
+      </Card>
+    )
+  })
+
   return (
     <Container>
       <Header>
@@ -142,140 +166,9 @@ const ListTripsPage = () => {
       </ButtonArea>
       <span>Lista de Viagens</span>
       <CardArea>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-        <Card>
-          <p><b>Nome: </b>Viagem fria para Plutão</p>
-          <p><b>Descrição: </b>A viagem mais incrível da galáxia.</p>
-          <p><b>Planeta: </b>Plutão</p>
-          <p><b>Duração: </b>980</p>
-          <p><b>Data: </b>2025-12-25</p>
-        </Card>
-
+        {listTrips.length === 0 ? <div>Carregando...</div> :
+          trips
+        }
       </CardArea>
     </Container>
   );

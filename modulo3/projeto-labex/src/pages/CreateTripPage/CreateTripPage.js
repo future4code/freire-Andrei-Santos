@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoMdRocket } from "react-icons/io"
 import { goToBack, goToHomePage, goToLoginPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Container = styled.div`
   display:flex;
@@ -137,6 +138,15 @@ const Content = styled.div`
 const CreateTripPage = () => {
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+
+    if(token  === null){
+      navigate("/login")
+    }
+  }, [])
+
   return (
     <Container>
       <Header>

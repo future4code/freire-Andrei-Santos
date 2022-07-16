@@ -16,7 +16,7 @@ export const Router = ()=> {
           <Route path="application-form" element={<ApplicationFormPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="admin" element={<AdminHomePage />} />
-          <Route path="trip-details" element={<TripDetailsPage />} />
+          <Route path="trip-details/:id" element={<TripDetailsPage />} />
           <Route path="create-trip" element={<CreateTripPage />} />
         </Routes>
       </BrowserRouter>
