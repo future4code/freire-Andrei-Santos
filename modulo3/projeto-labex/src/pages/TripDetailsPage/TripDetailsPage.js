@@ -61,11 +61,14 @@ const Card = styled.div`
   box-shadow:3px 3px 15px #ffffff90;
   border-radius:5px;
   padding:10px 20px;
-  max-width: 500px;
-  width: 100%;
+  width: 500px;
   margin:10px;
   transition:0.5s;
   margin-bottom:50px;
+
+  @media (max-width:600px){
+      width:250px;
+    }
 
   p{
     display: block;
@@ -217,7 +220,7 @@ const TripDetailsPage = () => {
   })
 
   const approvedCandidates = tripDetail && tripDetail.approved.map((candidate) => {
-    return <li>{candidate.name}</li>
+    return <li key={candidate.id}>{candidate.name}</li>
   })
 
   return (

@@ -3,7 +3,7 @@ import { IoMdRocket } from "react-icons/io"
 import { goToBack, goToHomePage, goToLoginPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react"
-import { getTrips } from "../../Services/requests";
+import { getTrips, applyToTrip } from "../../Services/requests";
 
 const Container = styled.div`
   display:flex;
@@ -135,13 +135,12 @@ const Content = styled.div`
     }
   }
 `
-
 const ApplicationFormPage = () => {
 
   const navigate = useNavigate()
 
   const [listTrips, setListTrips] = useState([])
-  const [listTripId, setListTripId] = useState("")
+  const [tripId, setTripId] = useState("")
   const [inputTrip, setInputTrip] = useState("")
   const [inputName, setInputName] = useState("")
   const [inputAge, setInputAge] = useState("")
@@ -153,18 +152,17 @@ const ApplicationFormPage = () => {
     getTrips(saveTrips)
   }, [])
 
-  useEffect(() => {
-
-    console.log(listTripId)
-
-  }, [inputTrip])
-
   const saveTrips = (data) => {
     setListTrips(data)
   }
 
+  const onChangeTrip = (e) => {
+    setTripId(e.target.value)
+  }
+
   const handdleInputTrip = (event) => {
     setInputTrip(event.target.value)
+    setTripId(event.target.value)
   }
   const handdleInputName = (event) => {
     setInputName(event.target.value)
@@ -183,7 +181,7 @@ const ApplicationFormPage = () => {
   }
 
   const tripsName = listTrips.map((trip) => {
-    return <option key={trip.id} onClick={() =>setListTripId(trip.id)}>{trip.name}</option>
+    return <option key={trip.id}>{trip.name}</option>
   })
 
   return (
@@ -418,7 +416,7 @@ const ApplicationFormPage = () => {
           </select>
           <ButtonArea>
             <div onClick={() => goToBack(navigate)}>Voltar</div>
-            <div>Enviar</div>
+            <div onClick={() => applyToTrip(tripId, inputName, inputAge, inputText, inputProfession, inputCountry)}>Enviar</div>
           </ButtonArea>
         </form>
       </Content>

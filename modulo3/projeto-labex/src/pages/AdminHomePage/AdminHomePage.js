@@ -4,7 +4,7 @@ import { IoMdRocket } from "react-icons/io"
 import { goToCreateTripPage, goToHomePage, goToLoginPage, goToTripDetailsPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { logout, getTrips } from "../../Services/requests"
+import { logout, getTrips, deleteTrip } from "../../Services/requests"
 
 const Container = styled.div`
   display:flex;
@@ -95,6 +95,7 @@ const Card = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+
     :hover{
       background-color:#ffffff70;
       cursor:pointer;
@@ -173,7 +174,7 @@ const AdminHomePage = () => {
     return (
       <Card key={trip.id} onClick={() => goToTripDetailsPage(navigate, trip.id)}>
       <p>{trip.name}</p>
-      <div><IoMdTrash /></div>
+      <div onClick={(e)=> {e.stopPropagation(); deleteTrip(trip.id)}}><IoMdTrash /></div>
       </Card>
     )
   })

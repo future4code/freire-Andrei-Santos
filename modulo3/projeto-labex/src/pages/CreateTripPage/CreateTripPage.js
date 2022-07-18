@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { IoMdRocket } from "react-icons/io"
 import { goToBack, goToHomePage, goToLoginPage } from "../../Routes/Cordinator";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createTrip } from "../../Services/requests";
 
 const Container = styled.div`
   display:flex;
@@ -42,10 +43,16 @@ const Container = styled.div`
     }
   }
 
+  input[type="date"] {
+    :invalid {
+      color: gray;
+    }
+  }
+
   input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(1) ;
-}
+   cursor: pointer;
+   filter: invert(0.5) ; 
+  }
 
   select{
     width: 518px;
@@ -56,6 +63,10 @@ const Container = styled.div`
     margin: 0px 0px 15px;
     background-color:#232323;
     color:white;
+
+    :invalid {
+      color: gray;
+    }
 
     @media (max-width:550px){
       width:270px;
@@ -138,6 +149,31 @@ const Content = styled.div`
 const CreateTripPage = () => {
 
   const navigate = useNavigate()
+  const [inputName, setInputName] = useState("")
+  const [inputPlanet, setInputPlanet] = useState("")
+  const [inputDate, setInputDate] = useState("")
+  const [inputDescription, setInputDescription] = useState("")
+  const [inputDuration, setInputDuration] = useState("")
+
+  const handdleInputName = (event) => {
+    setInputName(event.target.value)
+  }
+
+  const handdleInputPlanet = (event) => {
+    setInputPlanet(event.target.value)
+  }
+
+  const handdleInputDate = (event) => {
+    setInputDate(event.target.value)
+  }
+
+  const handdleInputDescription = (event) => {
+    setInputDescription(event.target.value)
+  }
+
+  const handdleInputDuration = (event) => {
+    setInputDuration(event.target.value)
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -161,23 +197,25 @@ const CreateTripPage = () => {
       <Content>
         <span>Criar Viagem</span>
         <form>
-          <input placeholder="Nome"></input>
-          <select>
-            <option disabled selected>Escolha um Planeta</option>
-            <option>opcao 1</option>
-            <option>opcao 2</option>
-            <option>opcao 3</option>
-            <option>opcao 4</option>
-            <option>opcao 5</option>
-            <option>opcao 6</option>
-            <option>opcao 7</option>
+          <input value={inputName} onChange={handdleInputName} placeholder="Nome"></input>
+          <select value={inputPlanet} onChange={handdleInputPlanet} required placeholder="Planeta" name="planet">
+            <option value="" disabled selected>Escolha um Planeta</option>
+            <option value="Mercúrio">Mercúrio</option>
+            <option value="Vênus">Vênus</option>
+            <option value="Terra">Terra</option>
+            <option value="Marte">Marte</option>
+            <option value="Jupiter">Jupiter</option>
+            <option value="Saturno">Saturno</option>
+            <option value="Urano">Urano</option>
+            <option value="Netuno">Netuno</option>
+            <option value="Plutão">Plutão</option>
           </select>
-          <input placeholder="Data" type="date"></input>
-          <input placeholder="Descricao"></input>
-          <input placeholder="Duracao em dias"></input>
+          <input value={inputDate} onChange={handdleInputDate} required placeholder="Data" type="date"></input>
+          <input value={inputDescription} onChange={handdleInputDescription} placeholder="Descricao"></input>
+          <input value={inputDuration} onChange={handdleInputDuration} placeholder="Duracao em dias"></input>
           <ButtonArea>
             <div onClick={() => goToBack(navigate)}>Voltar</div>
-            <div>Criar</div>
+            <div onClick={() => createTrip(inputName, inputPlanet, inputDate, inputDescription, inputDuration)}>Criar</div>
           </ButtonArea>
         </form>
       </Content>
