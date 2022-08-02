@@ -109,14 +109,12 @@ export const Post = styled.div`
   padding: 9px 10px;
   gap: 18px;
   margin-bottom: 10px;
-
   max-width: 600px;
   width: 100%;
-  min-height: 167px;
-
   background: #fbfbfb;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
+  transition: 0.3s;
 `;
 
 export const SendBy = styled.div`
@@ -155,6 +153,11 @@ export const Rating = styled.div`
     color: #6f6f6f;
     font-weight: 700;
   }
+
+  :hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #ccc;
+  }
 `;
 
 export const Comments = styled.div`
@@ -170,5 +173,10 @@ export const Comments = styled.div`
     font-size: 10px;
     color: #6f6f6f;
     font-weight: 400;
+  }
+
+  :hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #ccc;
   }
 `;

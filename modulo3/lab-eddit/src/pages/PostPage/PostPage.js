@@ -15,91 +15,81 @@ import {
   Comments,
 } from "./style";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
-import { useContext, useEffect } from "react";
-import { ContextScreen } from "../../ContextScreen";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../Context";
+import { useParams } from "react-router";
+import { getPostComments } from "../../services/requests";
 
 const PostPage = () => {
-  const currentScreen = useContext(ContextScreen);
+  const currentScreen = useContext(Context);
+  const clickedPost = useContext(Context);
+
+  const params = useParams();
+  const [comments, setComments] = useState();
 
   useProtectedPage();
 
   useEffect(() => {
     currentScreen.setCurrentScreen("post");
+    getPostComments(saveData, params.id);
   }, []);
+
+  const saveData = (data) => {
+    setComments(data);
+  };
+
+  const postCard = clickedPost.clickedPost?.map((p) => {
+    return (
+      <Post key={p.id}>
+        <SendBy>Enviado por: {p.username}</SendBy>
+        <Title>{p.body}</Title>
+        <ButtonArea>
+          <Rating>
+            <img src={UpArrow} alt="up arrow" />
+            <span>{p.voteSum}</span>
+            <img src={DownArrow} alt="down arrow" />
+          </Rating>
+          <Comments>
+            <img src={Baloon} alt="baloon" />
+            <span>{p.commentCount}</span>
+          </Comments>
+        </ButtonArea>
+      </Post>
+    );
+  });
+
+  const Postcomment = comments?.map((c) => {
+    return (
+      <Post key={c.id}>
+        <SendBy>Enviado por: {c.username}</SendBy>
+        <Title>{c.body}</Title>
+        <ButtonArea>
+          <Rating>
+            <img src={UpArrow} alt="up arrow" />
+            <span>{c.voteSum}</span>
+            <img src={DownArrow} alt="down arrow" />
+          </Rating>
+        </ButtonArea>
+      </Post>
+    );
+  });
 
   return (
     <div>
       <Content>
         <Form>
           <InputArea>
-            <Post>
-              <SendBy>Enviado por: labenu83</SendBy>
-              <Title>
-                Porque a maioria dos desenvolvedores usam Linux? ou as empresas
-                de tecnologia usam Linux ?
-              </Title>
-              <ButtonArea>
-                <Rating>
-                  <img src={UpArrow} alt="up arrow" />
-                  <span>211</span>
-                  <img src={DownArrow} alt="down arrow" />
-                </Rating>
-                <Comments>
-                  <img src={Baloon} alt="baloon" />
-                  <span>54</span>
-                </Comments>
-              </ButtonArea>
-            </Post>
+            {postCard}
             <textarea placeholder="Adicionar comentário"></textarea>
           </InputArea>
           <PostButton>Responder</PostButton>
           <Bar />
         </Form>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-          </ButtonArea>
-        </Post>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-          </ButtonArea>
-        </Post>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-          </ButtonArea>
-        </Post>
+        {comments && comments.length === 0 ? (
+          <div>Sem comentários.</div>
+        ) : (
+          Postcomment
+        )}
       </Content>
     </div>
   );

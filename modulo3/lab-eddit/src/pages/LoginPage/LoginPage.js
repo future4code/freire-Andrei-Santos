@@ -9,6 +9,8 @@ import {
   LoginButton,
   SignUpButton,
   Input,
+  ToolTip,
+  ToolTipText,
 } from "./style";
 import useForm from "../../hooks/useForm";
 import { goToSignUpPage } from "../../routes/coordinator";
@@ -16,10 +18,10 @@ import { useNavigate } from "react-router";
 import { login } from "../../services/requests";
 import { useUnprotectedPage } from "../../hooks/useUnprotectedPage";
 import { useContext, useEffect } from "react";
-import { ContextScreen } from "../../ContextScreen";
+import { Context } from "../../Context";
 
 const LoginPage = () => {
-  const currentScreen = useContext(ContextScreen);
+  const currentScreen = useContext(Context);
 
   useUnprotectedPage();
 
@@ -43,6 +45,19 @@ const LoginPage = () => {
         <SubTitle>O projeto de rede social da Labenu</SubTitle>
         <Form onSubmit={onSubmitForm}>
           <InputArea>
+            <ToolTip>
+              i
+              <ToolTipText id="ToolTipText">
+                Usuário teste: <br />
+                <br />
+                E-mail:
+                <br /> demo.email@gmail.com
+                <br />
+                <br />
+                Senha:
+                <br /> demo.password <br />
+              </ToolTipText>
+            </ToolTip>
             <Input
               placeholder="E-mail"
               name={"email"}

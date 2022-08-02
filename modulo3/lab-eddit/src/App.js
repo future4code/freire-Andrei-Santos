@@ -1,15 +1,18 @@
 import Router from "./routes/Router";
 import currentScreen from "./GlobalState/GlobalState";
 import { useState } from "react";
-import { ContextScreen } from "./ContextScreen";
+import { Context } from "./Context";
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState("teste");
+  const [currentScreen, setCurrentScreen] = useState();
+  const [clickedPost, setClickedPost] = useState();
 
   return (
-    <ContextScreen.Provider value={{ currentScreen, setCurrentScreen }}>
+    <Context.Provider
+      value={{ currentScreen, setCurrentScreen, clickedPost, setClickedPost }}
+    >
       <Router />
-    </ContextScreen.Provider>
+    </Context.Provider>
   );
 };
 

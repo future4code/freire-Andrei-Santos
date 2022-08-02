@@ -12,10 +12,10 @@ import {
   ConfirmBox,
 } from "./style";
 import { useContext, useEffect } from "react";
-import { ContextScreen } from "../../ContextScreen";
+import { Context } from "../../Context";
 
 const SignUpPage = () => {
-  const currentScreen = useContext(ContextScreen);
+  const currentScreen = useContext(Context);
 
   useUnprotectedPage();
 

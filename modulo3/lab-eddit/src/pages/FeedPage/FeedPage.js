@@ -16,22 +16,63 @@ import {
   Comments,
 } from "./style";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
-import { useContext, useEffect } from "react";
-import { ContextScreen } from "../../ContextScreen";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../Context";
+import { getPosts } from "../../services/requests";
+import { goToPostPage } from "../../routes/coordinator";
+import { useNavigate } from "react-router";
 
 const FeedPage = () => {
-  const currentScreen = useContext(ContextScreen);
+  const currentScreen = useContext(Context);
+  const clickedPost = useContext(Context);
+
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState();
 
   useProtectedPage();
 
   useEffect(() => {
     currentScreen.setCurrentScreen("feed");
+    getPosts(saveData);
   }, []);
+
+  const saveData = (data) => {
+    setPosts(data);
+  };
+
+  const onClickPost = (id) => {
+    goToPostPage(navigate, id);
+
+    const post = posts.filter((p) => {
+      return p.id === id;
+    });
+
+    clickedPost.setClickedPost(post);
+  };
+
+  const post = posts?.map((p) => {
+    return (
+      <Post key={p.id}>
+        <SendBy>Enviado por: {p.username}</SendBy>
+        <Title>{p.body}</Title>
+        <ButtonArea>
+          <Rating>
+            <img src={UpArrow} alt="up arrow" />
+            <span>{p.voteSum}</span>
+            <img src={DownArrow} alt="down arrow" />
+          </Rating>
+          <Comments onClick={() => onClickPost(p.id)}>
+            <img src={Baloon} alt="baloon" />
+            <span>{p.commentCount}</span>
+          </Comments>
+        </ButtonArea>
+      </Post>
+    );
+  });
 
   return (
     <div>
       <Content>
-        <div>{currentScreen.currentScreen}</div>
         <Form>
           <InputArea>
             <Input placeholder="Título do post" />
@@ -40,63 +81,7 @@ const FeedPage = () => {
           <PostButton>Postar</PostButton>
           <Bar />
         </Form>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-            <Comments>
-              <img src={Baloon} alt="baloon" />
-              <span>54</span>
-            </Comments>
-          </ButtonArea>
-        </Post>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-            <Comments>
-              <img src={Baloon} alt="baloon" />
-              <span>54</span>
-            </Comments>
-          </ButtonArea>
-        </Post>
-
-        <Post>
-          <SendBy>Enviado por: labenu83</SendBy>
-          <Title>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de
-            tecnologia usam Linux ?
-          </Title>
-          <ButtonArea>
-            <Rating>
-              <img src={UpArrow} alt="up arrow" />
-              <span>211</span>
-              <img src={DownArrow} alt="down arrow" />
-            </Rating>
-            <Comments>
-              <img src={Baloon} alt="baloon" />
-              <span>54</span>
-            </Comments>
-          </ButtonArea>
-        </Post>
+        {post}
       </Content>
     </div>
   );

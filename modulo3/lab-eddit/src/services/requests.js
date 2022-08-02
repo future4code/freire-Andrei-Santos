@@ -14,3 +14,37 @@ export const login = (body, clear, navigate) => {
       alert(err.response.data);
     });
 };
+
+export const getPosts = (saveData) => {
+  const token = localStorage.getItem("token");
+
+  axios
+    .get(`${BASE_URL}/posts`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      saveData(res.data);
+    })
+    .catch((err) => {
+      alert(err.response.data);
+    });
+};
+
+export const getPostComments = (saveData, id) => {
+  const token = localStorage.getItem("token");
+
+  axios
+    .get(`${BASE_URL}/posts/${id}/comments`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      saveData(res.data);
+    })
+    .catch((err) => {
+      alert(err.response.data);
+    });
+};

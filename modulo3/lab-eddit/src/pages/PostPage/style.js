@@ -109,11 +109,8 @@ export const Post = styled.div`
   padding: 9px 10px;
   gap: 18px;
   margin-bottom: 10px;
-
   max-width: 600px;
   width: 100%;
-  min-height: 167px;
-
   background: #fbfbfb;
   border: 1px solid #e0e0e0;
   border-radius: 12px;

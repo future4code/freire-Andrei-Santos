@@ -108,3 +108,46 @@ export const InputArea = styled.div`
   margin-top: 65px;
   margin-bottom: 40px;
 `;
+
+export const ToolTip = styled.div`
+  color: #0000ff95;
+  background-color: #0000ff15;
+  font-weight: bold;
+  border-radius: 3px;
+  position: relative;
+  display: inline-block;
+  padding: 0px 8px;
+  border: 1px solid #999;
+
+  :hover #ToolTipText {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+export const ToolTipText = styled.span`
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 0%;
+  margin-left: -10px;
+  padding: 5px 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  :after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+`;

@@ -1,9 +1,16 @@
 import styled from "styled-components";
-import { primaryColor } from "../../constants/colors";
 
 export const HeaderContainer = styled.header`
   background: #ededed;
   height: 50px;
+
+  ${(props) => {
+    if (props.currentScreen === "login" || props.currentScreen === "error") {
+      return "display:none;";
+    } else {
+      return null;
+    }
+  }}
 `;
 
 export const Content = styled.div`
@@ -31,8 +38,19 @@ export const HeaderButtonLeft = styled.div`
   font-weight: 100;
   font-size: 35px;
   height: 50px;
-  line-height: 40px;
   text-align: center;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  ${(props) => {
+    if (props.currentScreen === "post") {
+      return null;
+    } else {
+      return "display:none;";
+    }
+  }}
 `;
 
 export const HeaderButtonRight = styled.div`
