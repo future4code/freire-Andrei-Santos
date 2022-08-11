@@ -1,0 +1,15 @@
+{
+  "name": "aprofundamento-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node ./build/exercicio1.js && node ./build/exercicio2.js && node ./build/exercicio3.js && node ./build/exercicio4.js && node ./build/exercicio5.js"
+  },
+  "keywords": [],
+  "author": "Andrei Santos",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}
